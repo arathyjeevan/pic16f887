@@ -1,0 +1,56 @@
+#include <htc.h>
+
+#if defined(WDTE_OFF)
+__CONFIG(WDTE_OFF & LVP_OFF);
+#elif defined (WDTDIS)
+__CONFIG(WDTDIS & LVPDIS);
+#endif
+#define _XTAL_FREQ 4000000
+
+
+void main(void) {
+   
+    TRISC0=0;
+    TRISC1=0;
+    TRISC2=0;
+    TRISC3=0;
+    TRISD0=1;
+    TRISD1=1;
+    TRISB1=1;
+    TRISB2=1;
+     
+     while (1) 
+     { if(RD0==0)
+      {RC0=1;
+       RC1=1;}
+     else
+     if(RD0==1)
+     {RC0=0;
+      RC1=0;
+     }
+     if(RD1==0)
+      {RC3=1;
+       RC2=1;}
+     else
+     if(RD1==1)
+     {RC3=0;
+      RC2=0;
+     }
+     if(RB1==0)
+      {RC0=1;
+       RC1=0;}
+     else
+     if(RB1==1)
+     {RC0=0;
+      RC1=0;
+     }
+     if(RB2==0)
+      {RC0=0;
+       RC1=0;}
+     else
+     if(RB2==1)
+     {RC0=0;
+      RC1=0;
+     }
+        }
+}
