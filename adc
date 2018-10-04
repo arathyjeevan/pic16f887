@@ -1,0 +1,28 @@
+#include <htc.h>
+#include<lcd.h>
+#if defined(WDTE_OFF)
+__CONFIG(WDTE_OFF & LVP_OFF);
+#elif defined (WDTDIS)
+__CONFIG(WDTDIS & LVPDIS);
+#endif
+#define _XTAL_FREQ 4000000
+
+void ADC_Init()
+{ADCON0=0X81;
+ ADCON1=0X80;
+}
+unsigned int ADC_read(unsigned char channel) 
+{int a;
+    if (channel>13)
+    return 0;
+else
+{ADCON0&=0xC5;
+    ADCON0|=channel<<3;
+    __delay_ms(2);
+    GO_DONE=1;
+    while(GO_DONE);
+    return((ADRESH+8)+ADRESL);
+    
+    
+}
+}
